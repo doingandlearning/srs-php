@@ -7,14 +7,15 @@ class Database
 	private $conn;
 
 	private $host = '127.0.0.1';
-	private $port = '5432';
-	private $user = 'postgres';
-	private $pass = 'password';
-	private $name = 'srs';
+	private $port = '3306'; // MySQL default port
+	private $user = 'root';
+	private $pass = ''; // Empty string for password
+	private $name = 'srs'; // Target database name
 
 	private function __construct()
 	{
-		$this->conn = new PDO("pgsql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
+		// Create a new PDO connection
+		$this->conn = new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->name}", $this->user, $this->pass);
 		$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
@@ -30,5 +31,4 @@ class Database
 	{
 		return $this->conn;
 	}
-	
 }

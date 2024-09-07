@@ -1,4 +1,3 @@
-CREATE DATABASE srs;
 USE srs;
 
 CREATE TABLE cards (
@@ -7,7 +6,7 @@ CREATE TABLE cards (
     answer TEXT NOT NULL,
     last_reviewed DATE,
     next_review DATE,
-    interval INT DEFAULT 1
+    `interval` INT DEFAULT 1 -- Use backticks for 'interval'
 );
 
 CREATE TABLE users (
