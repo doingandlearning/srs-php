@@ -46,7 +46,7 @@
 </script>
 
 <h1>Review Card</h1>
-<?php if ($userCard) : ?>
+<?php if ($userCard): ?>
 	<p class="question"><?= htmlspecialchars($userCard['question']) ?></p>
 	<div class="previous">
 
@@ -71,7 +71,7 @@
 			<button type="submit" name="response" value="incorrect">Incorrect</button>
 		</div>
 	</form>
-<?php else : ?>
+<?php else: ?>
 	<p>No cards to review.</p>
 <?php endif; ?>
 

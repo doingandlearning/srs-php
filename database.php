@@ -6,10 +6,10 @@ class Database
 	private static $instance = null;
 	private $conn;
 
-	private $host = '127.0.0.1';
+	private $host = 'docker-mysql.orb.local';
 	private $port = '3306'; // MySQL default port
 	private $user = 'root';
-	private $pass = ''; // Empty string for password
+	private $pass = 'password'; // Empty string for password
 	private $name = 'srs'; // Target database name
 
 	private function __construct()

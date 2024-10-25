@@ -41,7 +41,7 @@ class UserCard
 	public function updateUserCard($id, $interval, $next_review, $repetitions, $ease_factor, $last_review_result)
 	{
 		$stmt = $this->conn->prepare("UPDATE user_cards 
-                                  SET interval = :interval, next_review = :next_review, last_reviewed = CURRENT_DATE, repetitions = :repetitions, ease_factor = :ease_factor, last_review_result = :last_review_result 
+                                  SET `interval` = :interval, next_review = :next_review, last_reviewed = CURRENT_DATE, repetitions = :repetitions, ease_factor = :ease_factor, last_review_result = :last_review_result 
                                   WHERE id = :id");
 		$stmt->bindParam(':interval', $interval);
 		$stmt->bindParam(':next_review', $next_review);
@@ -103,7 +103,7 @@ class UserCard
                                   FROM user_cards uc
                                   JOIN cards c ON uc.card_id = c.id
                                   WHERE uc.user_id = :user_id
-                                  ORDER BY RANDOM() LIMIT 1");
+                                  ORDER BY RAND() LIMIT 1");
 		$stmt->bindParam(':user_id', $userId);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -111,13 +111,12 @@ class UserCard
 	public function logProgress($userId, $cardId, $response)
 	{
 		$stmt = $this->conn->prepare("
-				INSERT INTO progress (user_id, card_id, reviews, correct_answers)
-				VALUES (:user_id, :card_id, 1, CASE WHEN :response = 'correct' THEN 1 ELSE 0 END)
-				ON CONFLICT (user_id, card_id)
-				DO UPDATE SET 
-						reviews = progress.reviews + 1,
-						correct_answers = progress.correct_answers + CASE WHEN EXCLUDED.correct_answers = 1 THEN 1 ELSE 0 END
-		");
+					INSERT INTO progress (user_id, card_id, reviews, correct_answers)
+					VALUES (:user_id, :card_id, 1, CASE WHEN :response = 'correct' THEN 1 ELSE 0 END)
+					ON DUPLICATE KEY UPDATE 
+							reviews = reviews + 1,
+							correct_answers = correct_answers + CASE WHEN VALUES(correct_answers) = 1 THEN 1 ELSE 0 END
+			");
 		$stmt->bindParam(':user_id', $userId);
 		$stmt->bindParam(':card_id', $cardId);
 		$stmt->bindParam(':response', $response);
