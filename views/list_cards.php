@@ -1,5 +1,4 @@
 <?php $title = 'List of cards'; ?>
-<?php include '../partials/header.php'; ?>
 <h1>List of Cards</h1>
 <table>
 	<tr>
@@ -31,6 +30,3 @@
 		</tr>
 	<?php endforeach; ?>
 </table>
-
-
-<?php include '../partials/footer.php'; ?>

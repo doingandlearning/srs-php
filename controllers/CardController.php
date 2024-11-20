@@ -27,7 +27,7 @@ class CardController
 		$this->cardModel->addCard($question, $answer);
 		$cardId = $this->cardModel->getLastInsertId();
 		$this->userCardModel->addUserCard($_SESSION['user_id'], $cardId);
-		$this->redirectLocation = '/controllers/CardController.php?action=list';
+		$this->redirectLocation = '/list.php';
 		if (!$testMode) {
 			header("Location: {$this->redirectLocation}");
 			exit; // Ensure script halts after redirection
@@ -61,7 +61,7 @@ class CardController
 		$userCardModel = $this->userCardModel;
 		# log out the content of $cards
 
-		require '../views/list_cards.php';
+		require 'views/list_cards.php';
 	}
 
 	public function addToUserList()
@@ -80,27 +80,13 @@ class CardController
 			$userCard = $this->userCardModel->getRandomUserCard($_SESSION['user_id']);
 		}
 
-		require '../views/review_cards.php';
+		require 'views/review_cards.php';
 	}
 
 	public function progress()
 	{
 		$progress = $this->userCardModel->getUserProgress($_SESSION['user_id']);
-		require '../views/progress.php';
+		require 'views/progress.php';
 	}
 }
 
-
-// Routing Logic
-$cardModel = new Card();
-$userCardModel = new UserCard();
-$controller = new CardController($cardModel, $userCardModel);
-
-// Determine which action to take
-$action = $_GET['action'] ?? 'list'; // Default to 'list' if no action is specified
-if (method_exists($controller, $action)) {
-	$controller->$action();
-} else {
-	header('Location: /index.php');
-	exit;
-}

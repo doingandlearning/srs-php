@@ -1,5 +1,4 @@
 <?php $title = 'Review card'; ?>
-<?php include '../partials/header.php'; ?>
 <style>
 	.answer-section,
 	.feedback-section {
@@ -74,5 +73,3 @@
 <?php else: ?>
 	<p>No cards to review.</p>
 <?php endif; ?>
-
-<?php include '../partials/footer.php'; ?>

@@ -1,5 +1,4 @@
 <?php $title = 'Add a new card'; ?>
-<?php include '../partials/header.php'; ?>
 
 <style>
 	form {
@@ -7,7 +6,7 @@
 	}
 </style>
 <h1>Add a New Card</h1>
-<form action="/controllers/CardController.php?action=add" method="POST">
+<form action="/add.php" method="POST">
 	<div>
 
 		<label for="question">Question:</label>
@@ -23,5 +22,3 @@
 		<button type="submit">Add Card</button>
 	</div>
 </form>
-
-<?php include '../partials/footer.php'; ?>

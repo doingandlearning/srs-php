@@ -39,10 +39,10 @@
 	<h1>Welcome to the Spaced Repetition System</h1>
 	<nav>
 		<ul class="list">
-			<li><a href="/controllers/CardController.php?action=add">Add New Card</a></li>
-			<li><a href="/controllers/CardController.php?action=list">List All Cards</a></li>
-			<li><a href="/controllers/CardController.php?action=getNext">Review Next Card</a></li>
-			<li><a href="/controllers/CardController.php?action=progress">Track Progress</a></li>
+			<li><a href="/add.php">Add New Card</a></li>
+			<li><a href="/list.php">List All Cards</a></li>
+			<li><a href="/review.php">Review Next Card</a></li>
+			<li><a href="/progress.php">Track Progress</a></li>
 		</ul>
 		<div class="logout"><a href="logout.php">Logout</a></div>
 	</nav>
